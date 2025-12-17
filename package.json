@@ -1,0 +1,13 @@
+{
+  "name": "devops-pipeline-app",
+  "version": "1.0.0",
+  "description": "Application web avec pipeline CI/CD DevOps",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

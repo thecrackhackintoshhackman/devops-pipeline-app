@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Pipeline App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🚀 DevOps App</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#features">Fonctionnalités</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Pipeline CI/CD en Action</h2>
+                <p>Application web déployée automatiquement avec GitHub Actions</p>
+                <div class="status-badges">
+                    <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status">
+                    <img src="https://img.shields.io/badge/deployment-production-blue" alt="Deployment">
+                    <img src="https://img.shields.io/badge/docker-latest-orange" alt="Docker">
+                </div>
+                <button class="cta-button" id="demoBtn">
+                    <i class="fas fa-play"></i> Voir la démo
+                </button>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdn-icons-png.flaticon.com/512/2092/2092658.png" alt="DevOps Illustration">
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Fonctionnalités</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-code-branch"></i>
+                    <h3>CI/CD Automatique</h3>
+                    <p>Déploiement continu avec GitHub Actions</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-docker"></i>
+                    <h3>Conteneurisation</h3>
+                    <p>Application Dockerisée prête pour la production</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Sécurité</h3>
+                    <p>Tests automatiques à chaque modification</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Performance</h3>
+                    <p>Optimisée pour un chargement rapide</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="deploy-status" class="status">
+            <h2>Statut du Pipeline</h2>
+            <div class="status-container">
+                <div class="status-step">
+                    <span class="step-number">1</span>
+                    <h4>Push Code</h4>
+                    <p class="status-success"><i class="fas fa-check-circle"></i> Détecté</p>
+                </div>
+                <div class="status-step">
+                    <span class="step-number">2</span>
+                    <h4>Tests Unitaires</h4>
+                    <p class="status-success"><i class="fas fa-check-circle"></i> Passés</p>
+                </div>
+                <div class="status-step">
+                    <span class="step-number">3</span>
+                    <h4>Build Docker</h4>
+                    <p class="status-success"><i class="fas fa-check-circle"></i> Réussi</p>
+                </div>
+                <div class="status-step">
+                    <span class="step-number">4</span>
+                    <h4>Déploiement</h4>
+                    <p class="status-success"><i class="fas fa-check-circle"></i> Actif</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="counter-section">
+            <h3>Compteur de visites</h3>
+            <div class="counter">
+                <span id="visitCount">0</span>
+                <p>Visites totales</p>
+            </div>
+            <button class="btn" id="incrementBtn">
+                <i class="fas fa-plus"></i> Incrémenter
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 DevOps Pipeline App - Déployé avec GitHub Actions</p>
+        <p class="build-info">
+            Build: <span id="buildVersion">1.0.0</span> | 
+            Date: <span id="buildDate">--/--/----</span>
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

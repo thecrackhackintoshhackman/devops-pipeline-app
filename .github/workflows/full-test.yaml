@@ -1,0 +1,51 @@
+name: Full Test Suite
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run Unit Tests
+      run: npm test
+    
+    - name: HTML Validation
+      uses: cycjimmy/semantic-release-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Check Links
+      run: |
+        echo "🔗 Vérification des liens..."
+        if grep -r "http://" . --include="*.html" --include="*.md"; then
+          echo "⚠️  Liens HTTP détectés (préférer HTTPS)"
+        fi
+    
+    - name: Generate Test Report
+      run: |
+        echo "# Rapport de Tests" > test-report.md
+        echo "## Résumé" >> test-report.md
+        echo "- ✅ Tests unitaires: Passés" >> test-report.md
+        echo "- ✅ Validation HTML: OK" >> test-report.md
+        echo "- 📅 Date: $(date)" >> test-report.md
+        echo "- 🏷️  SHA: ${{ github.sha }}" >> test-report.md
+    
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: test-report.md

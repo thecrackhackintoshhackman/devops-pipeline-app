@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Déployer sur GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+    
+    - name: Vérifier les fichiers
+      run: |
+        echo "📁 Fichiers à déployer:"
+        ls -la
+        echo "📊 Taille totale:"
+        du -sh .
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: '.'
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+    
+    - name: Afficher l'URL
+      run: |
+        echo "🌐 Votre site est publié à:"
+        echo "👉 https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+        echo ""
+        echo "📊 Informations de déploiement:"
+        echo "- Branche: ${{ github.ref }}"
+        echo "- Commit: ${{ github.sha }}"
+        echo "- Auteur: ${{ github.actor }}"

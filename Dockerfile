@@ -11,7 +11,7 @@ COPY app.js ./
 COPY tests/ ./tests/
 
 # Installer les dépendances
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Étape 2: Production
 FROM nginx:alpine

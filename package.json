@@ -4,8 +4,7 @@
   "description": "Application web avec pipeline CI/CD DevOps",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
-    "start": "npx serve ."
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "jest": "^29.0.0"

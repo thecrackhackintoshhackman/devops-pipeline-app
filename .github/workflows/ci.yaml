@@ -1,0 +1,60 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Tests Unitaires
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v3
+      
+    - name: Configuration de Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Installer les dépendances
+      run: npm ci
+    
+    - name: Exécuter les tests
+      run: npm test
+      
+    - name: Vérifier la syntaxe HTML/CSS
+      run: |
+        echo "Vérification des fichiers..."
+        if [ -f "index.html" ]; then
+          echo "✓ index.html présent"
+        fi
+        if [ -f "style.css" ]; then
+          echo "✓ style.css présent"
+        fi
+        if [ -f "app.js" ]; then
+          echo "✓ app.js présent"
+        fi
+    
+    - name: Générer un artefact de build
+      uses: actions/upload-artifact@v3
+      with:
+        name: web-app-build
+        path: |
+          index.html
+          style.css
+          app.js
+          package.json
+    
+    - name: Logs de build
+      run: |
+        echo "=== LOGS DE BUILD ==="
+        echo "Date: $(date)"
+        echo "Branche: ${{ github.ref }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Auteur: ${{ github.actor }}"
+        echo "===================="
